@@ -12,11 +12,11 @@
   $error = "";
   $mahasiswa = new Library();
   if(isset($_POST['tambah'])){
-    $nim        = $_POST['nim'];
-    $nama       = $_POST['nama'];
-    $prodi      = $_POST['prodi'];
-    $semester   = $_POST['semester'];
-    $alamat     = $_POST['alamat'];
+    $nim        = htmlspecialchars($_POST['nim']);
+    $nama       = htmlspecialchars($_POST['nama']);
+    $prodi      = htmlspecialchars($_POST['prodi']);
+    $semester   = htmlspecialchars($_POST['semester']);
+    $alamat     = htmlspecialchars($_POST['alamat']);
 
     if(!empty(trim($nim)) && !empty(trim($nama)) && !empty(trim($prodi)) && !empty(trim($semester)) && !empty(trim($alamat))){
       $tambah = $mahasiswa->input_data($nim,$nama,$prodi,$semester,$alamat);
