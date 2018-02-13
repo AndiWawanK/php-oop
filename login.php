@@ -1,6 +1,6 @@
 <?php
 session_start();
-$link = mysqli_connect($host='localhost',$user='root',$pass='',$db='mahasiswa');
+$link = mysqli_connect($host='localhost',$user='root',$pass='root',$db='mahasiswa');
 if(isset($_SESSION['username'])){
   header('location: index.php');
 }

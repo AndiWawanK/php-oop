@@ -19,6 +19,7 @@
     <link href="plugin/css/font-awesome.min.css" rel="stylesheet">
     <link href="plugin/style.css" rel="stylesheet">
 	  <link rel="stylesheet" type="text/css" href="plugin/calendar/demo/css/style.css">
+    <link href="plugin/datatables/css/dataTables.bootstrap.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -64,7 +65,7 @@
               </div><!-- /.container-fluid -->
             </nav>
             <!-- =========- -->
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="mydata">
             <thead class="thead">
               <tr>
                 <td>No</td>
@@ -76,83 +77,9 @@
                 <td>Opsi</td>
               </tr>
             </thead>
-              <?php
-              require_once "functions/library.php";
-              $mahasiswa = new Library();
-              $view = $mahasiswa->view_data();
-              while($data = $view->fetch(PDO::FETCH_OBJ)){
-                echo "
-                <tr>
-                  <td>$data->id</td>
-                  <td>$data->nim</td>
-                  <td>$data->nama</td>
-                  <td>$data->prodi</td>
-                  <td>$data->semester</td>
-                  <td>$data->alamat</td>
-                  <td class='opsi'>
-                    <button id='$data->id' type='button' class='view_data btn btn-success btn-md' data-toggle='modal' data-target='#myModal$data->id'><i class='fa fa-eye'></i> View</button>
-                    <div class='modal fade' id='myModal$data->id' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-                        <div class='modal-dialog' role='document'>
-                          <div class='modal-content'>
-                            <div class='modal-header'>
-                              <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                              <h4 class='modal-title' id='myModalLabel'><i class='fa fa-user'></i> Data Mahasiswa</h4>
-                            </div>
-                            <div class='modal-body detil-mahasiswa' id='data_mahasiswa'>
-                              <table class='table table bordered'>
-                              <tr>
-                                <td>Nim</td>
-                                <td>: $data->nim</td>
-                              </tr>
-                              <tr>
-                                <td>Nama</td>
-                                <td>: $data->nama</td>
-                              </tr>
-                              <tr>
-                                <td>Prodi</td>
-                                <td>: $data->prodi</td>
-                              </tr>
-                              <tr>
-                                <td>Semester</td>
-                                <td>: $data->semester</td>
-                              </tr>
-                              <tr>
-                                <td>Alamat</td>
-                                <td>: $data->alamat</td>
-                              </tr>
-                              </table>
-                            </div>
-                            <div class='modal-footer'>
-                              <button type='button' class='btn btn-primary' data-dismiss='modal'>Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    <a href='edit.php?id=$data->id' class='btn btn-primary btn-md'><i class='fa fa-pencil'></i> Edit</a>
-                    <a href='' type='button' class='btn btn-danger btn-md' data-toggle='modal' data-target='#myModal'><i class='fa fa-trash'></i> Delete</a>
-                    <div class='modal fade' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-                        <div class='modal-dialog' role='document'>
-                          <div class='modal-content'>
-                            <div class='modal-header'>
-                              <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                              <h4 class='modal-title' id='myModalLabel'>Anda yakin ingin mengapus data ini?</h4>
-                            </div>
-                            <div class='modal-body'>
-                              <p>Data yang dihapus akan Hilang!</p>
-                            </div>
-                            <div class='modal-footer'>
-                              <button type='button' class='btn btn-primary' data-dismiss='modal'>Cancel</button>
-                              <a href='index.php?delete=$data->id'><button class='btn btn-danger'>Confirm</button></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                  </td>
-                </tr>
-                ";
-              }
-               ?>
+            <tbody id="showData">
 
+            </tbody>
           </table>
           <?php
           if(isset($_GET['delete'])){
@@ -177,6 +104,41 @@
 
     <script src="plugin/js/jquery.min.js"></script>
     <script src="plugin/js/bootstrap.min.js"></script>
+    <script src="plugin/jquery/jquery-2.1.4.min.js"></script>
+    <script src="plugin/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="plugin/datatables/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        tampil_data();
+        $('#mydata').dataTable();
+
+        function tampil_data(){
+          $.ajax({
+            type  : 'ajax',
+            url   : 'functions/show.php',
+            async : false,
+            dataType : 'json',
+            success : function(data){
+              var mhsw = '';
+              var i;
+              for(i=0; data.length; i++){
+                mhsw += '<tr>'+
+                        '<td>'+data[i].id+'</td>'+
+                        '<td>'+data[i].nim+'</td>'+
+                        '<td>'+data[i].nama+'</td>'+
+                        '<td>'+data[i].prodi+'</td>'+
+                        '<td>'+data[i].semester+'</td>'+
+                        '<td>'+data[i].alamat+'</td>'+
+                        '</tr>';
+              }
+              console.log(url);
+              $('#showData').html(mhsw);
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
  <?php ob_flush(); ?>

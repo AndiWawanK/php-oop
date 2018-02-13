@@ -47,6 +47,7 @@
 	  <link rel="stylesheet" type="text/css" href="plugin/calendar/demo/css/style.css">
 	  <link rel="stylesheet" type="text/css" href="plugin/calendar/dist/css/pignose.calendar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="plugin/datatables/css/dataTables.bootstrap.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -185,7 +186,11 @@
 	  <script type="text/javascript" src="plugin/calendar/demo/js/semantic.ui.min.js"></script>
 	  <script type="text/javascript" src="plugin/calendar/demo/js/prism.min.js"></script>
 	  <script type="text/javascript" src="plugin/calendar/dist/js/pignose.calendar.js"></script>
+    
     <script type="text/javascript">
+
+
+
 	//<![CDATA[
 	$(function() {
 		$('#wrapper .version strong').text('v' + $.fn.pignoseCalendar.ComponentVersion);

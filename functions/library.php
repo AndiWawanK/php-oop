@@ -1,7 +1,7 @@
 <?php
 class Library{
   public function __construct(){
-    $this->db = new PDO('mysql:host=localhost;dbname=mahasiswa;','root','');
+    $this->db = new PDO('mysql:host=localhost;dbname=mahasiswa;','root','root');
   }
   public function input_data($nim,$nama,$prodi,$semester,$alamat){
     $sql   = "INSERT INTO data_mahasiswa (nim,nama,prodi,semester,alamat) VALUES ('$nim','$nama','$prodi','$semester','$alamat')";
@@ -15,6 +15,10 @@ class Library{
   public function view_data(){
     $sql   = "SELECT * FROM data_mahasiswa ";
     $query = $this->db->query($sql);
+    return $query;
+  }
+  public function view_data_mhsw(){
+    $query = $this->db->query("SELECT * FROM mahasiswa");
     return $query;
   }
   public function view_data_id($id){
