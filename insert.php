@@ -186,7 +186,7 @@
 	  <script type="text/javascript" src="plugin/calendar/demo/js/semantic.ui.min.js"></script>
 	  <script type="text/javascript" src="plugin/calendar/demo/js/prism.min.js"></script>
 	  <script type="text/javascript" src="plugin/calendar/dist/js/pignose.calendar.js"></script>
-    
+
     <script type="text/javascript">
 
 

@@ -18,8 +18,9 @@
     <link href="plugin/css/bootstrap.min.css" rel="stylesheet">
     <link href="plugin/css/font-awesome.min.css" rel="stylesheet">
     <link href="plugin/style.css" rel="stylesheet">
-	  <link rel="stylesheet" type="text/css" href="plugin/calendar/demo/css/style.css">
     <link href="plugin/datatables/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	  <link rel="stylesheet" type="text/css" href="plugin/calendar/demo/css/style.css">
   </head>
   <body>
     <div class="container">
@@ -110,10 +111,10 @@
     <script type="text/javascript">
       $(document).ready(function(){
 
-        tampil_data();
+        tampil_data_mahasiswa();
         $('#mydata').dataTable();
 
-        function tampil_data(){
+        function tampil_data_mahasiswa(){
           $.ajax({
             type  : 'ajax',
             url   : 'functions/show.php',
@@ -132,9 +133,9 @@
                         '<td>'+data[i].alamat+'</td>'+
                         '</tr>';
               }
-              console.log(url);
               $('#showData').html(mhsw);
             }
+
           });
         }
       });
