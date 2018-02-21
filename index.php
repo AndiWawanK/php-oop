@@ -133,6 +133,7 @@
                         '<td>'+data[i].alamat+'</td>'+
                         '</tr>';
               }
+              console.log(mhsw);
               $('#showData').html(mhsw);
             }
 
